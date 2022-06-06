@@ -1,8 +1,0 @@
-@media only print {
-
-    .navbar,
-    .card,
-    .btn {
-        display: none !important;
-    }
-}
