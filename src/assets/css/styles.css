@@ -1,0 +1,12 @@
+.btn-info {
+    margin-right: 5px;
+}
+
+@media only print {
+
+    .navbar,
+    .card,
+    .btn {
+        display: none !important;
+    }
+}
