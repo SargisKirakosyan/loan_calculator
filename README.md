@@ -7,7 +7,7 @@ Simple loan calculator. Calculating loan with prepayment. You can print your loa
 * Slight refactoring and readability increasing
 
 ## How to install
-* https://github.com/SargisKirakosyan/loan_calculator.git
+* git clone https://github.com/SargisKirakosyan/loan_calculator.git
 * cd loan_calculator
 * npm i
 * npm start
