@@ -1,10 +1,13 @@
-# Simple Loan Calculator v2.0
-Calculating loan with prepayment.
-You can print your loan payment period.
+# Simple Loan Calculator v2.0.1
+Simple loan calculator. Calculating loan with prepayment. You can print your loan payment period.
 
-## Main changes:
-* Fully work on React
-* jQuery removed
-* Calculated loans are stored in local storage
-* Bootstrap version updated
-* You can now see how much loan you receive and your total payment for it
+## v2.0.1 Minor changes:
+* Changed files extension to jsx
+* Redeclared internal function as arrow functions
+* Slight refactoring and readability increasing
+
+## How to install
+* https://github.com/SargisKirakosyan/loan_calculator.git
+* cd loan_calculator
+* npm i
+* npm start

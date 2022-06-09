@@ -5,21 +5,21 @@ export default function LoanCalculateForm(props) {
     const [maturity, setMaturity] = useState("");
     const [interest, setInterest] = useState("");
     const [prepayment, setPrepayment] = useState("");
+    let [totalPayment, setTotalPayment] = useState(0);
     const creditMoneyRef = useRef();
     const maturityRef = useRef();
     const interestRef = useRef();
     const prepaymentRef = useRef();
-    let [totalPayment, setTotalPayment] = useState(0);
     const loanCalculated = props.getLoanState;
 
-    function calculateLoan() {
-        let creditAmount, monthlyPaid, month, column, row, coins, loan;
-        let calculatedTable = [];
-        creditAmount = creditMoney - (creditMoney / 100) * prepayment; // The credit amount after prepayment
-        monthlyPaid = creditAmount / maturity; // Sum of monthly paid without interest
+    const calculateLoan = () => {
+        let [month, column, row, coins, interestAmount] = "";
+        let creditAmount = creditMoney - (creditMoney / 100) * prepayment; // The credit amount after prepayment
+        const monthlyPaid = creditAmount / maturity; // Sum of monthly paid without interest
+        const calculatedTable = [];
 
         const tableCell = (value, round) => {
-            if (isNaN(value) || !isFinite(value)) {
+            if (Number.isNaN(value) || !isFinite(value)) {
                 value = "Error";
             } else if (round) {
                 value = Math.ceil(value);
@@ -38,28 +38,30 @@ export default function LoanCalculateForm(props) {
         };
 
         for (month = 1; month <= maturity; month++) {
-            if (month === 1) setTotalPayment((totalPayment = 0));
+            if (month === 1) {
+                setTotalPayment((totalPayment = 0));
+            }
             tableCell(month, true); // The serial number of the month
             tableCell(creditAmount);
-            loan = (creditAmount * (interest / maturity)) / 100; // Size of interest for each month
-            tableCell(loan);
+            interestAmount = (creditAmount * (interest / maturity)) / 100; // Size of interest for each month
+            tableCell(interestAmount);
             tableCell(monthlyPaid); // Sum of monthly paid without interest
-            tableCell(monthlyPaid + loan); // Sum of monthly paid with interest
-            setTotalPayment((totalPayment += monthlyPaid + loan));
+            tableCell(monthlyPaid + interestAmount); // Sum of monthly paid with interest
+            setTotalPayment((totalPayment += monthlyPaid + interestAmount));
             creditAmount -= monthlyPaid;
             tableCell(month < maturity ? creditAmount : 0);
         }
         return calculatedTable;
-    }
+    };
 
-    function handleChange() {
+    const handleChange = () => {
         setCreditMoney(creditMoneyRef.current.value);
         setMaturity(maturityRef.current.value);
         setInterest(interestRef.current.value);
         setPrepayment(prepaymentRef.current.value);
-    }
+    };
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         if (
             creditMoney !== "" &&
             maturity !== "" &&
@@ -70,7 +72,7 @@ export default function LoanCalculateForm(props) {
             props.setLoanState(true);
         }
         e.preventDefault();
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -151,10 +153,7 @@ export default function LoanCalculateForm(props) {
             <div className="row mt-3">
                 <div className="col-md-4">
                     <div className="input-group">
-                        <button
-                            className="btn btn-success"
-                            onClick={calculateLoan}
-                        >
+                        <button type="submit" className="btn btn-success">
                             Calculate
                         </button>
                     </div>

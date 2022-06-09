@@ -1,5 +1,5 @@
 export default function PaymentPeriod(props) {
-    function ListFeatures() {
+    const ListFeatures = () => {
         const printTable = () => window.print(); // Print the payment period
 
         const clearTable = () => {
@@ -22,7 +22,7 @@ export default function PaymentPeriod(props) {
         );
     }
 
-    function PeriodList(props) {
+    const PeriodList = (props) => {
         const period = props.data;
 
         if (period) {

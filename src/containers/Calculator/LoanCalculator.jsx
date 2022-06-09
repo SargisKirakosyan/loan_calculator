@@ -22,16 +22,16 @@ export default function LoanCalculator() {
         );
     }, [paymentPeriod]);
 
-    function calculatePaymentPeriod(period) {
+    const calculatePaymentPeriod = (period) => {
         setPaymentPeriod([period]);
         setLoanCalculated(true);
     }
 
-    function clearPaymentPeriod() {
+    const clearPaymentPeriod = () => {
         setPaymentPeriod([]);
     }
 
-    function loanCalculatedCheck(state) {
+    const loanCalculatedCheck = (state) => {
         setLoanCalculated(state);
     }
 
